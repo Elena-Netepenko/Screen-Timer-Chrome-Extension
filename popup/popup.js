@@ -1,16 +1,26 @@
+
+//function to update time display
 function updateTime() {
+    //access chrome local chrome storage 
     chrome.storage.local.get(["timer", "timeOption", "isRunning"], (res) => {
+        //take time html element and set equa to time
         const time = document.getElementById("time")
+        //take user input time option and subtract the time that has accumlated on the timer variable
+        //this will show the minutes remaining
         const minutes = `${res.timeOption - Math.ceil(res.timer / 60)}`.padStart(2, "0")
-        let seconds = "00"
+         let seconds = "00"
+         //continue to update if timer doesn't equal zero
         if (res.timer % 60 != 0) {
             seconds = `${60 - res.timer % 60}`.padStart(2, "0")
         }
+        //display updated time content
         time.textContent = `${minutes}:${seconds}`
+        //change's display of timer based on pause/start
         startTimerBtn.textContent = res.isRunning ? "Pause Timer" : "Start Timer"
     })
 }
 
+//run update to timer every 1 second
 updateTime()
 setInterval(updateTime, 1000)
 

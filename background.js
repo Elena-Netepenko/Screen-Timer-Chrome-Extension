@@ -16,6 +16,8 @@ chrome.alarms.onAlarm.addListener((alarm) => {
                 let timer = res.timer + 1
                 let isRunning = true
                 //timer is equal to set time limit from options
+
+                
                 if (timer === 60 * res.timeOption) {
                     //send notification to user that screen time is up
                     this.registration.showNotification("Screen Timer", {
