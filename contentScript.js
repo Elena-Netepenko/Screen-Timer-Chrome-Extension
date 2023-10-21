@@ -13,11 +13,11 @@ function stopVideo () {
 }
 
 
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    if(request.message === "event_happened") {
-        // Handle the event and execute your DOM logic here
-        console.log("Event occurred in background script!");
-        // ... Your DOM logic goes here ...
-        stopVideo()
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+        if (request.message === "event_happened") {
+            console.log("Message received in content script!");
+            stopVideo();
+        }
     }
-});
+);

@@ -23,27 +23,19 @@ chrome.alarms.onAlarm.addListener((alarm) => {
                     console.log("Inside timer notification logic")
                     
 
-                        // chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                        //     if (tabs.length > 0) {  // Check if the tabs array is not empty
-                        //         var activeTab = tabs[0];
-                        //         chrome.tabs.sendMessage(activeTab.id, {"message": "event_happened"});
-                        //     } else {
-                        //         console.log("No Active Tabs")
-                        //     }
-                        // });
-                        chrome.tabs.onUpdated.addListener((tabId, tab) => {
-                            if (tab.url && tab.url.includes("https://www.netflix.com/watch")) {
-                            //   const queryParameters = tab.url.split("?")[1];
-                            //   const urlParameters = new URLSearchParams(queryParameters);
-                            //   console.log(urlParameters);
-                            console.log("Inside netflix tab")
-                              chrome.tabs.sendMessage(tabId, {"message": "event_happened"});
+                        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                                var activeTab = tabs[0];
+                                // console.log(activeTab);
+                                // console.log(activeTab.id);
+                                // chrome.tabs.sendMessage(activeTab.id, {"message": "event_happened"});
+                                if (activeTab.status === 'complete') {
+                                    setTimeout(function() {
+                                        console.log(activeTab.id);
+                                        chrome.tabs.sendMessage(activeTab.id, {"message": "event_happened"});
+                                    }, 1000);  // This will introduce a 1-second delay
+                                }
                             }
-                          });
-
-
-
-
+                        );
 
                     //unused notifcation settings
                     // this.registration.showNotification("Screen Timer", {
