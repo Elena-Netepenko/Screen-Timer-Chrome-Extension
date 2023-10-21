@@ -1,0 +1,35 @@
+body {
+    height: 400px;
+    width: 350px;
+    background-color: #00a1f5;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    background-color: whitesmoke;
+  }
+  
+  #time {
+    text-align: center;
+    font-size: 50px;
+    margin: 10px;
+    font-weight: normal;
+    color: whitesmoke;
+  }
+  
+  #btn-container {
+    display: flex;
+  }
+  
+  #btn-container > button {
+    color: #00a1f5;
+    background-color: whitesmoke;
+    width: 100px;
+    cursor: pointer;
+  }
+  
+
+
+  
