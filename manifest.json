@@ -4,6 +4,12 @@
   "name": "Scrren Time",
   "version": "1.0",
   "description": "Track your screen time on google chrome!",
+  "content_scripts": [
+    {
+      "matches": ["https://*.netflix.com/watch*"],
+      "js": ["./contentScript.js"]
+    }
+  ],
   "icons": {
     "16": "hourglass.png",
     "48": "hourglass.png",
@@ -14,7 +20,7 @@
     "default_title": "Screen Timer",
     "default_popup": "popup/popup.html"
   },
-  "permissions": ["storage", "alarms", "notifications"],
+  "permissions": ["storage", "alarms", "notifications", "tabs"],
   "background": {
     "service_worker": "background.js"
   },

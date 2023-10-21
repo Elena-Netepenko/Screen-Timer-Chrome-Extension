@@ -17,13 +17,39 @@ chrome.alarms.onAlarm.addListener((alarm) => {
                 let isRunning = true
                 //timer is equal to set time limit from options
 
-                
+                //if timer equal res.timeOption * 60
                 if (timer === 60 * res.timeOption) {
                     //send notification to user that screen time is up
-                    this.registration.showNotification("Screen Timer", {
-                        body: `${res.timeOption} minutes has passed. Your screen time is up!`,
-                        icon: "hourglass.png",
-                    })
+                    console.log("Inside timer notification logic")
+                    
+
+                        // chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                        //     if (tabs.length > 0) {  // Check if the tabs array is not empty
+                        //         var activeTab = tabs[0];
+                        //         chrome.tabs.sendMessage(activeTab.id, {"message": "event_happened"});
+                        //     } else {
+                        //         console.log("No Active Tabs")
+                        //     }
+                        // });
+                        chrome.tabs.onUpdated.addListener((tabId, tab) => {
+                            if (tab.url && tab.url.includes("https://www.netflix.com/watch")) {
+                            //   const queryParameters = tab.url.split("?")[1];
+                            //   const urlParameters = new URLSearchParams(queryParameters);
+                            //   console.log(urlParameters);
+                            console.log("Inside netflix tab")
+                              chrome.tabs.sendMessage(tabId, {"message": "event_happened"});
+                            }
+                          });
+
+
+
+
+
+                    //unused notifcation settings
+                    // this.registration.showNotification("Screen Timer", {
+                    //     body: `${res.timeOption} minutes has passed. Your screen time is up!`,
+                    //     icon: "hourglass.png",
+                    // })
                     //once notification sent reset timer to 0 and isRunning to false
                     timer = 0
                     isRunning = false

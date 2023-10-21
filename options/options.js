@@ -6,7 +6,7 @@ timeOption.addEventListener("change", (event) => {
     const val = event.target.value
     //only accepts values between 1-60
     if (val < 1 || val > 60) {
-        timeOption.value = 1
+        timeOption.value = 1;
     }
 })
 
@@ -23,5 +23,5 @@ saveBtn.addEventListener("click", () => {
 
 //getting value of timeOption local storage and set to 
 chrome.storage.local.get(["timeOption"], (res) => {
-    timeOption.value = res.timeOption
+    timeOption.value = res.timeOption;
 })
